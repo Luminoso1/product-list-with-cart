@@ -1,5 +1,6 @@
 <script lang="ts">
 	import type { Dessert } from '../types'
+	import { cart } from '../stores/cart.svelte'
 
 	type Props = {
 		dessert: Dessert
@@ -7,12 +8,11 @@
 	}
 	let { dessert, quantity = 0 }: Props = $props()
 
-	function add() {}
-	function update() {}
+	const { add, setQuantity: update } = cart
 </script>
 
 <div>
-	<div class="dessert-card {quantity ? 'has-quantity' : ''}">
+	<div class={['dessert-card', quantity && 'has-quantity']}>
 		<picture>
 			<source srcset={dessert.image.desktop} media="(min-width:768px)" />
 			<img src={dessert.image.mobile} alt={dessert.name} loading="lazy" class="dessert-image" />
@@ -21,12 +21,12 @@
 		<div class="action-container">
 			{#if quantity > 0}
 				<div class="quantity-controls">
-					<button onclick={() => update()}>+</button>
+					<button onclick={() => update(dessert.id, 1)} class="btn-update">+</button>
 					<span>{quantity}</span>
-					<button onclick={() => update()}>-</button>
+					<button onclick={() => update(dessert.id, -1)} class="btn-update">-</button>
 				</div>
 			{:else}
-				<button class="add-button" onclick={() => add()}>Add to cart</button>
+				<button class="add-button" onclick={() => add(dessert)}>Add to cart</button>
 			{/if}
 		</div>
 	</div>
@@ -71,6 +71,7 @@
 	.quantity-controls {
 		display: flex;
 		justify-content: space-evenly;
+		align-items: center;
 		background-color: var(--red);
 		padding: 0.5rem 0;
 		color: var(--white);
@@ -80,13 +81,20 @@
 		width: 100%;
 		padding: 0.5rem 0;
 		background: none;
-		border: none;
-		cursor: pointer;
 	}
 
 	.dessert-info {
 		margin-top: 1rem;
 		display: flex;
 		flex-direction: column;
+	}
+
+	.btn-update {
+		border: none;
+		width: 20px;
+		height: 20px;
+		display: grid;
+		place-content: center;
+		border-radius: 100vw;
 	}
 </style>

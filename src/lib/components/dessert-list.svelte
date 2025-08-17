@@ -2,20 +2,24 @@
 	import { fly } from 'svelte/transition'
 	import type { Dessert } from '../types'
 	import DessertItem from './dessert-item.svelte'
+	import { cart } from '../stores/cart.svelte'
 
 	type Props = {
 		desserts: Dessert[]
 	}
 
 	let { desserts }: Props = $props()
+
+	const { items: cartItems } = cart
 </script>
 
 <section>
 	<h1>Desserts</h1>
 	<div class="grid-container">
 		{#each desserts.slice(0, 9) as dessert, i (dessert)}
+			{@const quantity = $cartItems.find((item) => item.dessert.id === dessert.id)?.quantity || 0}
 			<div in:fly={{ y: 100, duration: 500, delay: i * 250 }}>
-				<DessertItem {dessert} />
+				<DessertItem {dessert} {quantity} />
 			</div>
 		{/each}
 	</div>

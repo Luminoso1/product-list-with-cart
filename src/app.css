@@ -57,4 +57,11 @@
 body {
 	min-width: 320px;
 	min-height: 100vh;
+	background-color: var(--rose-100);
+}
+
+button {
+	cursor: pointer;
+	border: none;
+	border-radius: 100vw;
 }
