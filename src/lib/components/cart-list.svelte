@@ -6,21 +6,11 @@
 	import emptyCart from '/src/assets/images/illustration-empty-cart.svg'
 	import { fly } from 'svelte/transition'
 
-	const { items, remove } = cart
-
-	const stats = $derived.by(() => {
-		let total = 0
-		let length = 0
-		for (const item of $items) {
-			total += item.dessert.price * item.quantity
-			length += item.quantity
-		}
-		return { total, length }
-	})
+	const { items, stats, remove } = cart
 </script>
 
 <section class="cart-container">
-	<h2 class="cart-title">Your cart {stats.length}</h2>
+	<h2 class="cart-title">Your cart ({$stats.length})</h2>
 
 	<div class="cart-items">
 		{#each $items as item (item.id)}
@@ -34,7 +24,7 @@
 		{/each}
 	</div>
 
-	{#if !stats.length}
+	{#if !$stats.length}
 		<div class="empty-cart" in:fly={{ y: 20, duration: 200, delay: 200 }}>
 			<img src={emptyCart} alt="Empty cart illustration" />
 			<p>Your added items will appear here</p>
@@ -42,9 +32,12 @@
 	{:else}
 		<div class="cart-summary">
 			<h3 class="order-total">
-				<span>Order total:</span>
-				<span class="total-amount">${stats.total.toFixed(2)}</span>
+				<span>Order total</span>
+				<span class="total-amount">${$stats.total.toFixed(2)}</span>
 			</h3>
+
+			<div class="info">This a carbon-neutral delivery</div>
+
 			<button class="confirm-button">Confirm Order</button>
 		</div>
 	{/if}
@@ -52,21 +45,22 @@
 
 <style>
 	.cart-container {
+		flex-basis: 24rem;
+		min-height: 20rem;
+		width: 100%;
 		position: relative;
 		display: flex;
 		flex-direction: column;
-		min-height: 20rem;
-		min-width: 20rem;
-		flex-grow: 1;
 		background-color: var(--white);
 		border-radius: 0.5rem;
-		padding: 1rem;
+		padding: 1.5rem;
 	}
 
 	.cart-title {
-		margin-bottom: 1rem;
-		font-size: 1.25rem;
-		font-weight: 500;
+		margin-bottom: 0.5rem;
+		font-size: 1.5rem;
+		font-weight: 700;
+		color: var(--red);
 	}
 
 	.cart-items {
@@ -97,27 +91,38 @@
 	}
 
 	.order-total {
-		margin-bottom: 1rem;
 		display: flex;
 		justify-content: space-between;
-		font-weight: 600;
+		color: var(--rose-900);
+	}
+
+	.order-total span:first-child {
+		font-size: 0.875rem;
 	}
 
 	.total-amount {
 		font-size: 1.5rem;
 		font-weight: bold;
-		color: var(--rose-900);
+	}
+
+	.info {
+		margin: 1.5rem 0;
+		text-align: center;
+		padding: 1rem 0;
+		border-radius: 0.5rem;
+		background-color: var(--rose-50);
 	}
 
 	.confirm-button {
 		width: 100%;
-		padding: 0.75rem;
-		background-color: var(--red);
-		color: var(--white);
+		padding: 1rem 0;
 		border: none;
 		border-radius: 9999px;
 		cursor: pointer;
 		font-size: 1rem;
+		font-weight: 600;
+		color: var(--white);
+		background-color: var(--red);
 	}
 
 	.confirm-button:hover {

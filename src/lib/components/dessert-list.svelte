@@ -27,21 +27,22 @@
 
 <style>
 	section {
-		width: 100%;
-		max-width: 48rem;
+		flex-basis: 50rem;
 	}
 
 	h1 {
 		margin-bottom: 1.5rem;
-		font-size: 1.875rem;
+		font-size: 2.5rem;
 		font-weight: bold;
+		line-height: 1.2;
 	}
 
 	.grid-container {
 		min-height: 100vh;
 		display: grid;
 		grid-template-columns: 1fr;
-		gap: 2rem;
+		column-gap: 1.5rem;
+		row-gap: 2rem;
 	}
 
 	@media (min-width: 640px) {
