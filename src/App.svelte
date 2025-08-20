@@ -3,6 +3,7 @@
 	import DessertList from './lib/components/dessert-list.svelte'
 	import { onMount } from 'svelte'
 	import CartList from './lib/components/cart-list.svelte'
+	import ConfirmOrder from './lib/components/confirm-order.svelte'
 
 	let desserts = $state<Dessert[]>([])
 
@@ -24,6 +25,7 @@
 <main>
 	<DessertList {desserts} />
 	<CartList />
+	<ConfirmOrder />
 </main>
 
 <style>

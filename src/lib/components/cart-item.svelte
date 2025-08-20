@@ -29,42 +29,6 @@
 </div>
 
 <style>
-	.cart-item {
-		display: flex;
-		align-items: center;
-		justify-content: space-between;
-		border-bottom: 1px solid #ffe4e6;
-		padding: 1rem 0;
-		font-size: 0.875rem;
-	}
-
-	.item-name {
-		font-weight: 600;
-		margin-bottom: 8px;
-		color: var(--rose-900);
-	}
-
-	.item-details {
-		margin: 0;
-		display: flex;
-		gap: 0.5rem;
-		align-items: baseline;
-	}
-
-	.item-quantity {
-		font-weight: 600;
-		color: var(--red);
-	}
-
-	.item-price {
-		color: var(--rose-500);
-	}
-
-	.item-total {
-		font-weight: 600;
-		color: var(--rose-500);
-	}
-
 	.remove-button {
 		background: none;
 		border: none;

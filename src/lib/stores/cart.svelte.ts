@@ -30,12 +30,17 @@ function createCartStore() {
 		items.update((c) => c.filter((i) => i.id !== id))
 	}
 
+	function confirmOrder() {
+		items.set([])
+	}
+
 	return {
 		items,
 		stats,
 		add,
 		setQuantity,
-		remove
+		remove,
+		confirmOrder
 	}
 }
 

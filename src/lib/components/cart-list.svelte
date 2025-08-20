@@ -38,7 +38,7 @@
 
 			<div class="info">This a carbon-neutral delivery</div>
 
-			<button class="confirm-button">Confirm Order</button>
+			<button class="confirm-button" commandfor="modal" command="show-modal">Confirm Order</button>
 		</div>
 	{/if}
 </section>
@@ -63,20 +63,6 @@
 		color: var(--red);
 	}
 
-	.cart-items {
-		max-height: 18rem;
-		overflow-y: auto;
-		overflow-x: hidden;
-		padding-right: 0.5rem;
-		margin-bottom: 1rem;
-		scrollbar-width: none;
-		-ms-overflow-style: none;
-	}
-
-	.cart-items::-webkit-scrollbar {
-		display: none;
-	}
-
 	.empty-cart {
 		display: flex;
 		flex-direction: column;
@@ -90,42 +76,11 @@
 		padding-top: 1rem;
 	}
 
-	.order-total {
-		display: flex;
-		justify-content: space-between;
-		color: var(--rose-900);
-	}
-
-	.order-total span:first-child {
-		font-size: 0.875rem;
-	}
-
-	.total-amount {
-		font-size: 1.5rem;
-		font-weight: bold;
-	}
-
 	.info {
 		margin: 1.5rem 0;
 		text-align: center;
 		padding: 1rem 0;
 		border-radius: 0.5rem;
 		background-color: var(--rose-50);
-	}
-
-	.confirm-button {
-		width: 100%;
-		padding: 1rem 0;
-		border: none;
-		border-radius: 9999px;
-		cursor: pointer;
-		font-size: 1rem;
-		font-weight: 600;
-		color: var(--white);
-		background-color: var(--red);
-	}
-
-	.confirm-button:hover {
-		background-color: darkred;
 	}
 </style>
