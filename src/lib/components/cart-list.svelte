@@ -8,7 +8,6 @@
 
 	const items = cart.items
 	const stats = cart.stats
-
 </script>
 
 <section class="cart-container">
