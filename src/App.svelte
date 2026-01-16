@@ -9,7 +9,9 @@
 
 	onMount(() => {
 		async function doFetch() {
-			const res = await fetch('/data.json')
+			const baseUrl = import.meta.env.BASE_URL
+      console.log(baseUrl)
+			const res = await fetch(`${baseUrl}data.json`)
 
 			if (!res.ok) throw new Error('Something went wrong fetching the desserts')
 
