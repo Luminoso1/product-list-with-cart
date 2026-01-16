@@ -6,7 +6,9 @@
 	import emptyCart from '/src/assets/images/illustration-empty-cart.svg'
 	import { fly } from 'svelte/transition'
 
-	const { items, stats, remove } = cart
+	const items = cart.items
+	const stats = cart.stats
+
 </script>
 
 <section class="cart-container">
@@ -19,7 +21,7 @@
 				out:send={{ key: item.id }}
 				animate:flip={{ duration: 200 }}
 			>
-				<CartItem {item} {remove} />
+				<CartItem {item} remove={() => cart.remove(item.id)} />
 			</div>
 		{/each}
 	</div>

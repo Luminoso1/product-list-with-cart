@@ -3,7 +3,7 @@
 
 	type Props = {
 		item: CartItem
-		remove: (id: string) => void
+		remove: () => void
 	}
 
 	let { item = $bindable(), remove }: Props = $props()
@@ -18,7 +18,7 @@
 			<span class="item-total">${(item.quantity * item.dessert.price).toFixed(2)}</span>
 		</p>
 	</div>
-	<button class="remove-button" onclick={() => remove(item.id)} aria-label="remove item"
+	<button class="remove-button" onclick={remove} aria-label="remove item"
 		><svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" fill="none" viewBox="0 0 10 10"
 			><path
 				fill="#CAAFA7"

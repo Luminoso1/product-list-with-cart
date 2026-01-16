@@ -2,7 +2,8 @@
 	import { fade } from 'svelte/transition'
 	import { cart } from '../stores/cart.svelte'
 
-	const { items, stats, confirmOrder } = cart
+	const items = cart.items
+	const stats = cart.stats
 </script>
 
 <dialog id="modal" transition:fade>
@@ -36,8 +37,11 @@
 		</h3>
 	</div>
 
-	<button commandfor="modal" command="close" class="confirm-button" onclick={confirmOrder}
-		>Start New Order</button
+	<button
+		commandfor="modal"
+		command="close"
+		class="confirm-button"
+		onclick={() => cart.confirmOrder()}>Start New Order</button
 	>
 </dialog>
 

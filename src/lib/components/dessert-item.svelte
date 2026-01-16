@@ -7,8 +7,6 @@
 		quantity?: number
 	}
 	let { dessert, quantity = 0 }: Props = $props()
-
-	const { add, setQuantity: update } = cart
 </script>
 
 <div class={['dessert-card', quantity && 'has-quantity']}>
@@ -23,7 +21,7 @@
 				<div class="quantity-controls">
 					<button
 						type="button"
-						onclick={() => update(dessert.id, -1)}
+						onclick={() => cart.setQuantity(dessert.id, -1)}
 						class="btn-update"
 						aria-label="increment quantity"
 					>
@@ -38,7 +36,7 @@
 					<span>{quantity}</span>
 					<button
 						type="button"
-						onclick={() => update(dessert.id, 1)}
+						onclick={() => cart.setQuantity(dessert.id, 1)}
 						class="btn-update"
 						aria-label="increment quantity"
 					>
@@ -56,7 +54,7 @@
 					</button>
 				</div>
 			{:else}
-				<button type="button" class="add-button" onclick={() => add(dessert)}>
+				<button type="button" class="add-button" onclick={() => cart.add(dessert)}>
 					<svg
 						xmlns="http://www.w3.org/2000/svg"
 						width="21"

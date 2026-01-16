@@ -10,7 +10,7 @@
 
 	let { desserts }: Props = $props()
 
-	const { items: cartItems } = cart
+	const cartItems = cart.items
 </script>
 
 <section>

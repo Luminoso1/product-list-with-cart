@@ -1,9 +1,10 @@
 import type { CartItem, Dessert } from '../types'
 import { derived, writable } from 'svelte/store'
 
-function createCartStore() {
-	const items = writable<CartItem[]>([])
-	const stats = derived(items, ($items) => {
+class CartStore {
+	private _items = writable<CartItem[]>([])
+
+	private _stats = derived(this.items, ($items) => {
 		let total = 0
 		let length = 0
 		for (const item of $items) {
@@ -13,35 +14,34 @@ function createCartStore() {
 		return { total, length }
 	})
 
-	function add(dessert: Dessert) {
-		const id = crypto.randomUUID().toString()
-		items.update((prev) => [...prev, { id, dessert, quantity: 1 }])
+	get items() {
+		return this._items
 	}
 
-	function setQuantity(id: string, delta: number) {
-		items.update((c) =>
+	get stats() {
+		return this._stats
+	}
+
+	add(dessert: Dessert) {
+		const id = crypto.randomUUID().toString()
+		this.items.update((prev) => [...prev, { id, dessert, quantity: 1 }])
+	}
+
+	setQuantity(id: string, delta: number) {
+		this.items.update((c) =>
 			c
 				.map((n) => (n.dessert.id === id ? { ...n, quantity: Math.max(0, n.quantity + delta) } : n))
 				.filter((n) => n.quantity > 0)
 		)
 	}
 
-	function remove(id: string) {
-		items.update((c) => c.filter((i) => i.id !== id))
+	remove(id: string) {
+		this.items.update((c) => c.filter((i) => i.id !== id))
 	}
 
-	function confirmOrder() {
-		items.set([])
-	}
-
-	return {
-		items,
-		stats,
-		add,
-		setQuantity,
-		remove,
-		confirmOrder
+	confirmOrder() {
+		this.items.set([])
 	}
 }
 
-export const cart = createCartStore()
+export const cart = new CartStore()
